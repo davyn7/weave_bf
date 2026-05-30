@@ -1,6 +1,14 @@
-# Template
+# Weave Backend for Buana Finance
 
-Add the following files into .gitignore
-* `.env`
-* `.venv/`
-* `__pycache__/`
+## Introduction
+
+## Infrastructure
+
+Backend: Python FastAPI  
+Database: Supabase  
+Deployment: Railway    
+Frontend: Retool
+
+## Run Test
+
+`uvicorn main:app --reload`
