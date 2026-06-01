@@ -61,8 +61,7 @@ class CustomerBase(BaseModel):
     KECAMATAN: Optional[str] = None
     KOTA: Optional[str] = None
     PROVINSI: Optional[str] = None
-    CUST_ID_TYPE: Optional[str] = None
-    CUST_FOTO_ID: Optional[str] = None
+    KTP_PHOTO: Optional[str] = None
 
 class SpouseBase(BaseModel):
     CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID

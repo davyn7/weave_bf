@@ -1,11 +1,13 @@
 from app.connection import supabase
 from app.schemas import (
-    CustomerBase,
     ProvinceBase,
     CityBase,
     KecamatanBase,
     KelurahanBase,
-    BranchBase
+    BranchBase,
+    CustomerBase,
+    SpouseBase,
+    GuarantorBase
 )
 from uuid import UUID
 
@@ -103,4 +105,60 @@ async def delete_customer_db(customer_id: int):
 
 async def delete_customers_db():
     response = supabase.table("CUSTOMERS").delete().neq("id", 0).execute()
+    return response.data
+
+# Spouse DB Operations
+
+async def get_spouses_db():
+    response = supabase.table("SPOUSES").select("*").execute()
+    return response.data
+
+async def get_spouse_db(spouse_id: int):
+    response = supabase.table("SPOUSES").select("*").eq("id", spouse_id).execute()
+    return response.data
+
+async def add_spouse_db(spouse: SpouseBase):
+    spouse_data = spouse.model_dump(mode="json")
+    response = supabase.table("SPOUSES").insert(spouse_data).execute()
+    return response.data
+
+async def update_spouse_db(spouse: SpouseBase, spouse_id: int):
+    spouse_data = spouse.model_dump(exclude_unset=True, mode="json")
+    response = supabase.table("SPOUSES").update(spouse_data).eq("id", spouse_id).execute()
+    return response.data
+
+async def delete_spouse_db(spouse_id: int):
+    response = supabase.table("SPOUSES").delete().eq("id", spouse_id).execute()
+    return response.data
+
+async def delete_spouses_db():
+    response = supabase.table("SPOUSES").delete().neq("id", 0).execute()
+    return response.data
+
+# Guarantor DB Operations
+
+async def get_guarantors_db():
+    response = supabase.table("GUARANTORS").select("*").execute()
+    return response.data
+
+async def get_guarantor_db(guarantor_id: int):
+    response = supabase.table("GUARANTORS").select("*").eq("id", guarantor_id).execute()
+    return response.data
+
+async def add_guarantor_db(guarantor: GuarantorBase):
+    guarantor_data = guarantor.model_dump(mode="json")
+    response = supabase.table("GUARANTORS").insert(guarantor_data).execute()
+    return response.data
+
+async def update_guarantor_db(guarantor: GuarantorBase, guarantor_id: int):
+    guarantor_data = guarantor.model_dump(exclude_unset=True, mode="json")
+    response = supabase.table("GUARANTORS").update(guarantor_data).eq("id", guarantor_id).execute()
+    return response.data
+
+async def delete_guarantor_db(guarantor_id: int):
+    response = supabase.table("GUARANTORS").delete().eq("id", guarantor_id).execute()
+    return response.data
+
+async def delete_guarantors_db():
+    response = supabase.table("GUARANTORS").delete().neq("id", 0).execute()
     return response.data
