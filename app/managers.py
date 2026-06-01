@@ -5,6 +5,7 @@ from app.schemas import (
     CityBase,
     KecamatanBase,
     KelurahanBase,
+    BranchBase,
     CustomerBase
 )
 from app.db import (
@@ -16,6 +17,12 @@ from app.db import (
     get_kecamatans_db,
     get_kelurahans_db,
     get_postal_code_db,
+    get_branches_db,
+    get_branch_db,
+    add_branch_db,
+    update_branch_db,
+    delete_branch_db,
+    delete_branches_db,
     get_customers_db,
     get_customer_db,
     add_customer_db,
@@ -65,6 +72,29 @@ class LocationSearchManager:
 
     async def get_postal_code(self):
         return await get_postal_code_db(self.kelurahan_id)
+
+class BranchManager:
+
+    def __init__(self, branch: BranchBase):
+        self.branch = branch
+
+    async def get_branches(self):
+        return await get_branches_db()
+
+    async def get_branch(self, branch_id: int):
+        return await get_branch_db(branch_id)
+
+    async def add_branch(self):
+        return await add_branch_db(self.branch)
+
+    async def update_branch(self, branch_id: int):
+        return await update_branch_db(self.branch, branch_id)
+
+    async def delete_branch(self, branch_id: int):
+        return await delete_branch_db(branch_id)
+
+    async def delete_branches(self):
+        return await delete_branches_db()
 
 class CustomerManager:
 

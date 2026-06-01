@@ -23,13 +23,28 @@ class KelurahanBase(BaseModel):
     POSTAL_CODE: Optional[str] = None
 
 class DealerBase(BaseModel):
-    pass
+    BRANCH_ID: Optional[int] = None # Foreign Key to BRANCH_ID
+    NAME: Optional[str] = None
+    ADDRESS: Optional[str] = None
+    PROVINCE_ID: Optional[int] = None # Foreign Key to PROVINCE_ID
+    CITY_ID: Optional[int] = None # Foreign Key to CITY_ID
+    KECAMATAN_ID: Optional[int] = None # Foreign Key to KECAMATAN_ID
+    KELURAHAN_ID: Optional[int] = None # Foreign Key to KELURAHAN_ID
+    POSTAL_CODE: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    DESCRIPTION: Optional[str] = None
 
 class UserBase(BaseModel):
-    # Foreign Key to DEALER_ID
-    pass
+    DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
+    FIRST_NAME: Optional[str] = None
+    LAST_NAME: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    DEALER_PIC: Optional[bool] = False
 
 class CustomerBase(BaseModel):
+    DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
     FIRST_NAME: Optional[str] = None
     LAST_NAME: Optional[str] = None
     PHONE_NUMBER: Optional[str] = None
@@ -50,19 +65,71 @@ class CustomerBase(BaseModel):
     CUST_FOTO_ID: Optional[str] = None
 
 class SpouseBase(BaseModel):
-    # Foreign Key to CUSTOMER_ID
-    pass
+    CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID
+    FIRST_NAME: Optional[str] = None
+    LAST_NAME: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    NIK: Optional[str] = None
+    NPWP: Optional[str] = None
+    GENDER: Optional[str] = None
+    BIRTH_PLACE: Optional[str] = None
+    BIRTH_DATE: Optional[date] = None
 
 class GuarantorBase(BaseModel):
-    # Foreign Key to CUSTOMER_ID
-    pass
+    CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID
+    FIRST_NAME: Optional[str] = None
+    LAST_NAME: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    NIK: Optional[str] = None
+    NPWP: Optional[str] = None
+    GENDER: Optional[str] = None
+    BIRTH_PLACE: Optional[str] = None
+    BIRTH_DATE: Optional[date] = None
 
 class AssetBase(BaseModel):
-    # Foreign Key to DEALER_ID
-    pass
+    DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
+    BRAND: Optional[str] = None
+    MODEL: Optional[str] = None
+    YEAR: Optional[int] = None
+    COLOR: Optional[str] = None
+    CONDITION: Optional[str] = None # New or Used
+    PLATE_NUMBER: Optional[str] = None
 
 class ApplicationBase(BaseModel):
-    # Foreign Key to DEALER_ID
-    # Foreign Key to CUSTOMER_ID
-    # Foreign Key to USER_ID
+    DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
+    CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID
+    CMO_ID: Optional[int] = None # Foreign Key to CMO_ID
+    USER_ID: Optional[int] = None # Foreign Key to USER_ID
+    ASSET_ID: Optional[int] = None # Foreign Key to ASSET_ID
+    OTR_PRICE: Optional[int] = None
+    DOWN_PAYMENT: Optional[int] = None
+    TENOR: Optional[int] = None
+    INTEREST_RATE: Optional[float] = None
+    TOTAL_PAYMENT: Optional[int] = None
+    TOTAL_INTEREST: Optional[int] = None
+    TOTAL_PAYMENT: Optional[int] = None
+    STATUS: Optional[str] = None # Pending, Approved, Rejected, Cancelled, Completed
+
+class BranchBase(BaseModel):
+    NAME: Optional[str] = None
+    ADDRESS: Optional[str] = None
+    PROVINCE_ID: Optional[int] = None # Foreign Key to PROVINCE_ID
+    CITY_ID: Optional[int] = None # Foreign Key to CITY_ID
+    POSTAL_CODE: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    DESCRIPTION: Optional[str] = None
+
+class CMOBase(BaseModel):
+    BRANCH_ID: Optional[int] = None # Foreign Key to BRANCH_ID
+    FIRST_NAME: Optional[str] = None
+    LAST_NAME: Optional[str] = None
+    PHONE_NUMBER: Optional[str] = None
+    EMAIL: Optional[str] = None
+    DESCRIPTION: Optional[str] = None
+
+class SurveyBase(BaseModel):
+    APPLICATION_ID: Optional[int] = None # Foreign Key to APPLICATION_ID
     pass

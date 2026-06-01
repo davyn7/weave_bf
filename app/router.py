@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from app.managers import (
     LocationManager,
     LocationSearchManager,
+    BranchManager,
     CustomerManager
 )
 from app.schemas import (
@@ -11,6 +12,7 @@ from app.schemas import (
     CityBase,
     KecamatanBase,
     KelurahanBase,
+    BranchBase,
     CustomerBase
 )
 from uuid import UUID
@@ -92,6 +94,56 @@ async def get_postal_code(kelurahan_id: int):
     try:
         manager = LocationSearchManager(kelurahan_id=kelurahan_id)
         return await manager.get_postal_code()
+    except Exception as e:
+        raise e
+
+# Branch Routers
+
+@router.get("/branches", tags=["Branch"])
+async def get_branches():
+    try:
+        manager = BranchManager(None)
+        return await manager.get_branches()
+    except Exception as e:
+        raise e
+
+@router.get("/branches/{branch_id}", tags=["Branch"])
+async def get_branch(branch_id: int):
+    try:
+        manager = BranchManager(None)
+        return await manager.get_branch(branch_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_branch", tags=["Branch"])
+async def add_branch(branch: BranchBase):
+    try:
+        manager = BranchManager(branch)
+        return await manager.add_branch()
+    except Exception as e:
+        raise e
+
+@router.put("/update_branch/{branch_id}", tags=["Branch"])
+async def update_branch(branch_id: int, branch: BranchBase):
+    try:
+        manager = BranchManager(branch)
+        return await manager.update_branch(branch_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_branch/{branch_id}", tags=["Branch"])
+async def delete_branch(branch_id: int):
+    try:
+        manager = BranchManager(None)
+        return await manager.delete_branch(branch_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_branches", tags=["Branch"])
+async def delete_branches():
+    try:
+        manager = BranchManager(None)
+        return await manager.delete_branches()
     except Exception as e:
         raise e
 

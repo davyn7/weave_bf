@@ -4,7 +4,8 @@ from app.schemas import (
     ProvinceBase,
     CityBase,
     KecamatanBase,
-    KelurahanBase
+    KelurahanBase,
+    BranchBase
 )
 from uuid import UUID
 
@@ -48,6 +49,34 @@ async def get_postal_code_db(kelurahan_id: int):
     response = supabase.table("KELURAHAN").select("POSTAL_CODE").eq("id", kelurahan_id).execute()
     return response.data
 
+# Branch DB Operations
+
+async def get_branches_db():
+    response = supabase.table("BRANCHES").select("*").execute()
+    return response.data
+
+async def get_branch_db(branch_id: int):
+    response = supabase.table("BRANCHES").select("*").eq("id", branch_id).execute()
+    return response.data
+
+async def add_branch_db(branch: BranchBase):
+    branch_data = branch.model_dump(mode="json")
+    response = supabase.table("BRANCHES").insert(branch_data).execute()
+    return response.data
+
+async def update_branch_db(branch: BranchBase, branch_id: int):
+    branch_data = branch.model_dump(exclude_unset=True, mode="json")
+    response = supabase.table("BRANCHES").update(branch_data).eq("id", branch_id).execute()
+    return response.data
+
+async def delete_branch_db(branch_id: int):
+    response = supabase.table("BRANCHES").delete().eq("id", branch_id).execute()
+    return response.data
+
+async def delete_branches_db():
+    response = supabase.table("BRANCHES").delete().neq("id", 0).execute()
+    return response.data
+
 # Customer DB Operations
 
 async def get_customers_db():
@@ -73,5 +102,5 @@ async def delete_customer_db(customer_id: int):
     return response.data
 
 async def delete_customers_db():
-    response = supabase.table("CUSTOMERS").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
+    response = supabase.table("CUSTOMERS").delete().neq("id", 0).execute()
     return response.data
