@@ -35,6 +35,15 @@ async def populate():
 async def clear():
     pass
 
+# Credit Simulation Routers
+# TODO
+@router.post("/credit_simulation", tags=["Credit Simulation"])
+async def credit_simulation():
+    try:
+        pass
+    except Exception as e:
+        raise e
+
 # Location Routers
 
 @router.post("/add_province", tags=["Location"])
@@ -153,6 +162,14 @@ async def delete_interest_rates():
     except Exception as e:
         raise e
         
+@router.put("/update_interest_rate_field_by_conditions", tags=["Interest Rate"])
+async def update_interest_rate_field_by_conditions(update_data: dict, conditions: dict):
+    try:
+        manager = InterestRateManager(None)
+        return await manager.update_interest_rate_field_by_conditions(update_data, conditions)
+    except Exception as e:
+        raise e
+
 # Branch Routers
 
 @router.get("/branches", tags=["Branch"])

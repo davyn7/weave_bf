@@ -80,6 +80,18 @@ async def delete_interest_rates_db():
     response = supabase.table("INTEREST_RATES").delete().neq("id", 0).execute()
     return response.data
 
+async def update_interest_rate_field_by_conditions_db(
+    update_data: dict,
+    conditions: dict,
+):
+    query = supabase.table("INTEREST_RATES").update(update_data)
+
+    for column, value in conditions.items():
+        query = query.eq(column, value)
+
+    response = query.execute()
+    return response.data
+
 # Branch DB Operations
 
 async def get_branches_db():

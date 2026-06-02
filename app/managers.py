@@ -26,6 +26,7 @@ from app.db import (
     update_interest_rate_db,
     delete_interest_rate_db,
     delete_interest_rates_db,
+    update_interest_rate_field_by_conditions_db,
     get_branches_db,
     get_branch_db,
     add_branch_db,
@@ -116,6 +117,9 @@ class InterestRateManager:
 
     async def delete_interest_rates(self):
         return await delete_interest_rates_db()
+    
+    async def update_interest_rate_field_by_conditions(self, update_data: dict, conditions: dict):
+        return await update_interest_rate_field_by_conditions_db(update_data, conditions)
 
 class BranchManager:
 
