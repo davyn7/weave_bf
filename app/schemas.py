@@ -35,6 +35,16 @@ class DealerBase(BaseModel):
     EMAIL: Optional[str] = None
     DESCRIPTION: Optional[str] = None
 
+class InterestRateBase(BaseModel):
+    TENOR_YEAR: Optional[int] = None
+    TENOR_MONTH: Optional[int] = None
+    TYPE: Optional[str] = None # New or Used
+    RATE: Optional[float] = None
+
+class DepreciationBase(BaseModel):
+    YEAR: Optional[int] = None
+    DEPRECIATION: Optional[float] = None
+
 class UserBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
     FIRST_NAME: Optional[str] = None
@@ -42,6 +52,8 @@ class UserBase(BaseModel):
     PHONE_NUMBER: Optional[str] = None
     EMAIL: Optional[str] = None
     DEALER_PIC: Optional[bool] = False
+    UNIQUE_CODE: Optional[str] = None
+    IS_ACTIVE: Optional[bool] = False
 
 class CustomerBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID

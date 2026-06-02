@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from app.managers import (
     LocationManager,
     LocationSearchManager,
+    InterestRateManager,
     BranchManager,
     CustomerManager,
     SpouseManager,
@@ -14,6 +15,7 @@ from app.schemas import (
     CityBase,
     KecamatanBase,
     KelurahanBase,
+    InterestRateBase,
     BranchBase,
     CustomerBase,
     SpouseBase,
@@ -101,6 +103,56 @@ async def get_postal_code(kelurahan_id: int):
     except Exception as e:
         raise e
 
+# Interest Rate Routers
+
+@router.get("/interest_rates", tags=["Interest Rate"])
+async def get_interest_rates():
+    try:
+        manager = InterestRateManager(None)
+        return await manager.get_interest_rates()
+    except Exception as e:
+        raise e
+
+@router.get("/interest_rates/{interest_rate_id}", tags=["Interest Rate"])
+async def get_interest_rate(interest_rate_id: int):
+    try:
+        manager = InterestRateManager(None)
+        return await manager.get_interest_rate(interest_rate_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_interest_rate", tags=["Interest Rate"])
+async def add_interest_rate(interest_rate: InterestRateBase):
+    try:
+        manager = InterestRateManager(interest_rate)
+        return await manager.add_interest_rate()
+    except Exception as e:
+        raise e
+
+@router.put("/update_interest_rate/{interest_rate_id}", tags=["Interest Rate"])
+async def update_interest_rate(interest_rate_id: int, interest_rate: InterestRateBase):
+    try:
+        manager = InterestRateManager(interest_rate)
+        return await manager.update_interest_rate(interest_rate_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_interest_rate/{interest_rate_id}", tags=["Interest Rate"])
+async def delete_interest_rate(interest_rate_id: int):
+    try:
+        manager = InterestRateManager(None)
+        return await manager.delete_interest_rate(interest_rate_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_interest_rates", tags=["Interest Rate"])
+async def delete_interest_rates():
+    try:
+        manager = InterestRateManager(None)
+        return await manager.delete_interest_rates()
+    except Exception as e:
+        raise e
+        
 # Branch Routers
 
 @router.get("/branches", tags=["Branch"])

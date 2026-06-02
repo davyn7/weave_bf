@@ -4,6 +4,7 @@ from app.schemas import (
     CityBase,
     KecamatanBase,
     KelurahanBase,
+    InterestRateBase,
     BranchBase,
     CustomerBase,
     SpouseBase,
@@ -49,6 +50,34 @@ async def get_kelurahans_db(kecamatan_id: int):
 
 async def get_postal_code_db(kelurahan_id: int):
     response = supabase.table("KELURAHAN").select("POSTAL_CODE").eq("id", kelurahan_id).execute()
+    return response.data
+
+# Interest Rate DB Operations
+
+async def get_interest_rates_db():
+    response = supabase.table("INTEREST_RATES").select("*").execute()
+    return response.data
+
+async def get_interest_rate_db(interest_rate_id: int):
+    response = supabase.table("INTEREST_RATES").select("*").eq("id", interest_rate_id).execute()
+    return response.data
+
+async def add_interest_rate_db(interest_rate: InterestRateBase):
+    interest_rate_data = interest_rate.model_dump(mode="json")
+    response = supabase.table("INTEREST_RATES").insert(interest_rate_data).execute()
+    return response.data
+
+async def update_interest_rate_db(interest_rate: InterestRateBase, interest_rate_id: int):
+    interest_rate_data = interest_rate.model_dump(exclude_unset=True, mode="json")
+    response = supabase.table("INTEREST_RATES").update(interest_rate_data).eq("id", interest_rate_id).execute()
+    return response.data
+
+async def delete_interest_rate_db(interest_rate_id: int):
+    response = supabase.table("INTEREST_RATES").delete().eq("id", interest_rate_id).execute()
+    return response.data
+
+async def delete_interest_rates_db():
+    response = supabase.table("INTEREST_RATES").delete().neq("id", 0).execute()
     return response.data
 
 # Branch DB Operations

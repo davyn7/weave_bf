@@ -5,6 +5,7 @@ from app.schemas import (
     CityBase,
     KecamatanBase,
     KelurahanBase,
+    InterestRateBase,
     BranchBase,
     CustomerBase,
     SpouseBase,
@@ -19,6 +20,12 @@ from app.db import (
     get_kecamatans_db,
     get_kelurahans_db,
     get_postal_code_db,
+    get_interest_rates_db,
+    get_interest_rate_db,
+    add_interest_rate_db,
+    update_interest_rate_db,
+    delete_interest_rate_db,
+    delete_interest_rates_db,
     get_branches_db,
     get_branch_db,
     add_branch_db,
@@ -44,6 +51,7 @@ from app.db import (
     delete_guarantor_db,
     delete_guarantors_db
 )
+from app.helpers import generate_unique_code
 from uuid import UUID
 from typing import Optional
 
@@ -86,6 +94,28 @@ class LocationSearchManager:
 
     async def get_postal_code(self):
         return await get_postal_code_db(self.kelurahan_id)
+
+class InterestRateManager:
+    def __init__(self, interest_rate: InterestRateBase):
+        self.interest_rate = interest_rate
+
+    async def get_interest_rates(self):
+        return await get_interest_rates_db()
+    
+    async def get_interest_rate(self, interest_rate_id: int):
+        return await get_interest_rate_db(interest_rate_id)
+
+    async def add_interest_rate(self):
+        return await add_interest_rate_db(self.interest_rate)
+
+    async def update_interest_rate(self, interest_rate_id: int):
+        return await update_interest_rate_db(self.interest_rate, interest_rate_id)
+
+    async def delete_interest_rate(self, interest_rate_id: int):
+        return await delete_interest_rate_db(interest_rate_id)
+
+    async def delete_interest_rates(self):
+        return await delete_interest_rates_db()
 
 class BranchManager:
 
