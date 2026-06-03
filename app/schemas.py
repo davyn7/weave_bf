@@ -34,6 +34,7 @@ class DealerBase(BaseModel):
     PHONE_NUMBER: Optional[str] = None
     EMAIL: Optional[str] = None
     DESCRIPTION: Optional[str] = None
+    UNIQUE_CODE: Optional[str] = None
 
 class InterestRateBase(BaseModel):
     TENOR_YEAR: Optional[int] = None
@@ -48,10 +49,9 @@ class InterestRateBase(BaseModel):
 
 class InsuranceBase(BaseModel):
     PROVINCE_ID: Optional[int] = None # Foreign Key to PROVINCE_ID
-    UPPER_LIMIT: Optional[int] = None
-    LOWER_LIMIT: Optional[int] = None
+    UPPER_LIMIT: Optional[float] = None
+    LOWER_LIMIT: Optional[float] = None
     RATE: Optional[float] = None
-    CUMULATIVE_RATE: Optional[float] = None
 
 class UserBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
@@ -75,13 +75,15 @@ class CustomerBase(BaseModel):
     GENDER: Optional[str] = None
     BIRTH_PLACE: Optional[str] = None
     BIRTH_DATE: Optional[date] = None
-    MARITAL_STATUS: Optional[str] = None
+    MARITAL_STATUS: Optional[bool] = None
     ADDRESS: Optional[str] = None
     KELURAHAN: Optional[str] = None
     KECAMATAN: Optional[str] = None
-    KOTA: Optional[str] = None
-    PROVINSI: Optional[str] = None
+    CITY: Optional[str] = None
+    PROVINCE: Optional[str] = None
+    PROVINCE_ID: Optional[int] = None
     KTP_PHOTO: Optional[str] = None
+    GUARANTOR: Optional[bool] = False
 
 class SpouseBase(BaseModel):
     CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID
@@ -122,13 +124,17 @@ class ApplicationBase(BaseModel):
     CMO_ID: Optional[int] = None # Foreign Key to CMO_ID
     USER_ID: Optional[int] = None # Foreign Key to USER_ID
     ASSET_ID: Optional[int] = None # Foreign Key to ASSET_ID
-    OTR_PRICE: Optional[int] = None
-    DOWN_PAYMENT: Optional[int] = None
-    TENOR: Optional[int] = None
+    TENOR_YEAR: Optional[int] = None
+    TENOR_MONTH: Optional[int] = None
+    OTR: Optional[int] = None
+    DP: Optional[int] = None
+    INSURANCE: Optional[int] = None
+    PROVISION: Optional[int] = None
+    PRINCIPAL: Optional[int] = None
+    MONTHLY_PAYMENT: Optional[int] = None
     INTEREST_RATE: Optional[float] = None
-    TOTAL_PAYMENT: Optional[int] = None
-    TOTAL_INTEREST: Optional[int] = None
-    TOTAL_PAYMENT: Optional[int] = None
+    ADMIN_FEE: Optional[int] = None
+    FIRST_PAYMENT: Optional[int] = None
     STATUS: Optional[str] = None # Pending, Approved, Rejected, Cancelled, Completed
 
 class BranchBase(BaseModel):

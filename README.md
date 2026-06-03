@@ -47,3 +47,4 @@ Frontend: Retool
 * Does a Dealer need to be connected to a Province?
 * When does CMO get assigned?
 * When do the financial numbers get calculated?
+* Does Asset need to be deleted once it's been assigned to an Application?

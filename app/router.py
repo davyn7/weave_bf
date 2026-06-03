@@ -2,13 +2,20 @@
 
 from fastapi import APIRouter
 from app.managers import (
+    TestManager,
     LocationManager,
     LocationSearchManager,
     InterestRateManager,
+    InsuranceManager,
     BranchManager,
+    CMOManager,
+    DealerManager,
+    UserManager,
     CustomerManager,
     SpouseManager,
-    GuarantorManager
+    GuarantorManager,
+    ApplicationManager,
+    AssetManager
 )
 from app.schemas import (
     ProvinceBase,
@@ -16,10 +23,16 @@ from app.schemas import (
     KecamatanBase,
     KelurahanBase,
     InterestRateBase,
+    InsuranceBase,
     BranchBase,
+    CMOBase,
+    DealerBase,
+    UserBase,
     CustomerBase,
     SpouseBase,
-    GuarantorBase
+    GuarantorBase,
+    ApplicationBase,
+    AssetBase
 )
 from uuid import UUID
 
@@ -34,15 +47,6 @@ async def populate():
 @router.delete("/clear", tags=["Testing"])
 async def clear():
     pass
-
-# Credit Simulation Routers
-# TODO
-@router.post("/credit_simulation", tags=["Credit Simulation"])
-async def credit_simulation():
-    try:
-        pass
-    except Exception as e:
-        raise e
 
 # Location Routers
 
@@ -161,12 +165,62 @@ async def delete_interest_rates():
         return await manager.delete_interest_rates()
     except Exception as e:
         raise e
-        
+
 @router.put("/update_interest_rate_field_by_conditions", tags=["Interest Rate"])
 async def update_interest_rate_field_by_conditions(update_data: dict, conditions: dict):
     try:
         manager = InterestRateManager(None)
         return await manager.update_interest_rate_field_by_conditions(update_data, conditions)
+    except Exception as e:
+        raise e
+
+# Insurance Routers
+
+@router.get("/insurances", tags=["Insurance"])
+async def get_insurances():
+    try:
+        manager = InsuranceManager(None)
+        return await manager.get_insurances()
+    except Exception as e:
+        raise e
+
+@router.get("/insurances/{insurance_id}", tags=["Insurance"])
+async def get_insurance(insurance_id: int):
+    try:
+        manager = InsuranceManager(None)
+        return await manager.get_insurance(insurance_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_insurance", tags=["Insurance"])
+async def add_insurance(insurance: InsuranceBase):
+    try:
+        manager = InsuranceManager(insurance)
+        return await manager.add_insurance()
+    except Exception as e:
+        raise e
+
+@router.put("/update_insurance/{insurance_id}", tags=["Insurance"])
+async def update_insurance(insurance_id: int, insurance: InsuranceBase):
+    try:
+        manager = InsuranceManager(insurance)
+        return await manager.update_insurance(insurance_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_insurance/{insurance_id}", tags=["Insurance"])
+async def delete_insurance(insurance_id: int):
+    try:
+        manager = InsuranceManager(None)
+        return await manager.delete_insurance(insurance_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_insurances", tags=["Insurance"])
+async def delete_insurances():
+    try:
+        manager = InsuranceManager(None)
+        return await manager.delete_insurances()
     except Exception as e:
         raise e
 
@@ -217,6 +271,156 @@ async def delete_branches():
     try:
         manager = BranchManager(None)
         return await manager.delete_branches()
+    except Exception as e:
+        raise e
+
+# CMO Routers
+
+@router.get("/cmos", tags=["CMO"])
+async def get_cmos():
+    try:
+        manager = CMOManager(None)
+        return await manager.get_cmos()
+    except Exception as e:
+        raise e
+
+@router.get("/cmos/{cmo_id}", tags=["CMO"])
+async def get_cmo(cmo_id: int):
+    try:
+        manager = CMOManager(None)
+        return await manager.get_cmo(cmo_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_cmo", tags=["CMO"])
+async def add_cmo(cmo: CMOBase):
+    try:
+        manager = CMOManager(cmo)
+        return await manager.add_cmo()
+    except Exception as e:
+        raise e
+
+@router.put("/update_cmo/{cmo_id}", tags=["CMO"])
+async def update_cmo(cmo_id: int, cmo: CMOBase):
+    try:
+        manager = CMOManager(cmo)
+        return await manager.update_cmo(cmo_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_cmo/{cmo_id}", tags=["CMO"])
+async def delete_cmo(cmo_id: int):
+    try:
+        manager = CMOManager(None)
+        return await manager.delete_cmo(cmo_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_cmos", tags=["CMO"])
+async def delete_cmos():
+    try:
+        manager = CMOManager(None)
+        return await manager.delete_cmos()
+    except Exception as e:
+        raise e
+
+# Dealer Routers
+
+@router.get("/dealers", tags=["Dealer"])
+async def get_dealers():
+    try:
+        manager = DealerManager(None)
+        return await manager.get_dealers()
+    except Exception as e:
+        raise e
+
+@router.get("/dealers/{dealer_id}", tags=["Dealer"])
+async def get_dealer(dealer_id: int):
+    try:
+        manager = DealerManager(None)
+        return await manager.get_dealer(dealer_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_dealer", tags=["Dealer"])
+async def add_dealer(dealer: DealerBase):
+    try:
+        manager = DealerManager(dealer)
+        return await manager.add_dealer()
+    except Exception as e:
+        raise e
+
+@router.put("/update_dealer/{dealer_id}", tags=["Dealer"])
+async def update_dealer(dealer_id: int, dealer: DealerBase):
+    try:
+        manager = DealerManager(dealer)
+        return await manager.update_dealer(dealer_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_dealer/{dealer_id}", tags=["Dealer"])
+async def delete_dealer(dealer_id: int):
+    try:
+        manager = DealerManager(None)
+        return await manager.delete_dealer(dealer_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_dealers", tags=["Dealer"])
+async def delete_dealers():
+    try:
+        manager = DealerManager(None)
+        return await manager.delete_dealers()
+    except Exception as e:
+        raise e
+
+# User Routers
+
+@router.get("/users", tags=["User"])
+async def get_users():
+    try:
+        manager = UserManager(None)
+        return await manager.get_users()
+    except Exception as e:
+        raise e
+
+@router.get("/users/{user_id}", tags=["User"])
+async def get_user(user_id: int):
+    try:
+        manager = UserManager(None)
+        return await manager.get_user(user_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_user", tags=["User"])
+async def add_user(user: UserBase):
+    try:
+        manager = UserManager(user)
+        return await manager.add_user()
+    except Exception as e:
+        raise e
+
+@router.put("/update_user/{user_id}", tags=["User"])
+async def update_user(user_id: int, user: UserBase):
+    try:
+        manager = UserManager(user)
+        return await manager.update_user(user_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_user/{user_id}", tags=["User"])
+async def delete_user(user_id: int):
+    try:
+        manager = UserManager(None)
+        return await manager.delete_user(user_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_users", tags=["User"])
+async def delete_users():
+    try:
+        manager = UserManager(None)
+        return await manager.delete_users()
     except Exception as e:
         raise e
 
@@ -367,5 +571,143 @@ async def delete_guarantors():
     try:
         manager = GuarantorManager(None)
         return await manager.delete_guarantors()
+    except Exception as e:
+        raise e
+
+# Application Routers
+
+@router.get("/applications", tags=["Applications"])
+async def get_applications():
+    try:
+        manager = ApplicationManager(None)
+        return await manager.get_applications()
+    except Exception as e:
+        raise e
+
+@router.get("/applications/{application_id}", tags=["Applications"])
+async def get_application(application_id: int):
+    try:
+        manager = ApplicationManager(None)
+        return await manager.get_application(application_id)
+    except Exception as e:
+        raise e
+
+@router.post("/add_application", tags=["Applications"])
+async def add_application(application: ApplicationBase):
+    try:
+        manager = ApplicationManager(application)
+        return await manager.add_application()
+    except Exception as e:
+        raise e
+
+@router.put("/update_application/{application_id}", tags=["Applications"])
+async def update_application(application_id: int, application: ApplicationBase):
+    try:
+        manager = ApplicationManager(application)
+        return await manager.update_application(application_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_application/{application_id}", tags=["Applications"])
+async def delete_application(application_id: int):
+    try:
+        manager = ApplicationManager(None)
+        return await manager.delete_application(application_id)
+    except Exception as e:
+        raise e
+
+@router.delete("/delete_applications", tags=["Applications"])
+async def delete_applications():
+    try:
+        manager = ApplicationManager(None)
+        return await manager.delete_applications()
+    except Exception as e:
+        raise e
+
+# @router.get("/calculate_insurance_rate", tags=["Applications"])
+# async def calculate_insurance_rate(
+#     otr: int,
+#     province_id: int,
+#     tenor_year: int,
+#     TYPE: str
+# ):
+#     try:
+#         manager = ApplicationManager(None)
+#         return await manager.calculate_insurance_rate(
+#             otr=otr,
+#             province_id=province_id,
+#             tenor_year=tenor_year,
+#             TYPE=TYPE,
+#         )
+#     except Exception as e:
+#         raise e
+
+@router.get("/application_credit_simulation", tags=["Applications"])
+async def application_credit_simulation(application_id: int, PROVISION: int = 0):
+    try:
+        manager = ApplicationManager(None)
+        application_dict = await manager.get_application(application_id)
+        application_dict = application_dict[0]
+        application = ApplicationBase(**application_dict)
+        new_manager = ApplicationManager(application)
+        return await new_manager.application_credit_simulation(PROVISION=PROVISION)
+    except Exception as e:
+        raise e
+
+# @router.put("/add_application_credit_simulation", tags=["Applications"])
+# async def add_application_credit_simulation(application: ApplicationBase):
+#     try:
+#         manager = ApplicationManager(application)
+#         return await manager.add_application_credit_simulation()
+#     except Exception as e:
+#         raise e
+
+# Asset Routers
+
+@router.get("/assets", tags=["Assets"])
+async def get_assets():
+    try:
+        manager = AssetManager(None)
+        return await manager.get_assets()
+    except Exception as e:
+        raise e
+        
+@router.get("/assets/{asset_id}", tags=["Assets"])
+async def get_asset(asset_id: int):
+    try:
+        manager = AssetManager(None)
+        return await manager.get_asset(asset_id)
+    except Exception as e:
+        raise e
+        
+@router.post("/add_asset", tags=["Assets"])
+async def add_asset(asset: AssetBase):
+    try:
+        manager = AssetManager(asset)
+        return await manager.add_asset()
+    except Exception as e:
+        raise e
+
+@router.put("/update_asset/{asset_id}", tags=["Assets"])
+async def update_asset(asset_id: int, asset: AssetBase):
+    try:
+        manager = AssetManager(asset)
+        return await manager.update_asset(asset_id)
+    except Exception as e:
+        raise e
+        
+@router.delete("/delete_asset/{asset_id}", tags=["Assets"])
+async def delete_asset(asset_id: int):
+    try:
+        manager = AssetManager(None)
+        return await manager.delete_asset(asset_id)
+    except Exception as e:
+        raise e
+        
+@router.delete("/delete_assets", tags=["Assets"])
+async def delete_assets():
+    try:
+        manager = AssetManager(None)
+        return await manager.delete_assets()
     except Exception as e:
         raise e
