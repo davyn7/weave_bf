@@ -678,7 +678,7 @@ async def application_credit_simulation(application_id: int, PROVISION: int = 0)
     except Exception as e:
         raise e
 
-@router.get("/test_application_credit_simulation", tags=["Applications"])
+@router.post("/test_application_credit_simulation", tags=["Applications"])
 async def test_application_credit_simulation(OTR: int, DP: int, TENOR_YEAR: int, TENOR_MONTH: int, TYPE: str, PROVINCE_ID: int):
     try:
         manager = ApplicationManager(None)
