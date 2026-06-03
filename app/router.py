@@ -678,6 +678,14 @@ async def application_credit_simulation(application_id: int, PROVISION: int = 0)
     except Exception as e:
         raise e
 
+@router.get("/test_application_credit_simulation", tags=["Applications"])
+async def test_application_credit_simulation(OTR: int, DP: int, TENOR_YEAR: int, TENOR_MONTH: int, TYPE: str, PROVINCE_ID: int):
+    try:
+        manager = ApplicationManager(None)
+        return await manager.test_application_credit_simulation(OTR=OTR, DP=DP, TENOR_YEAR=TENOR_YEAR, TENOR_MONTH=TENOR_MONTH, TYPE=TYPE, PROVINCE_ID=PROVINCE_ID)
+    except Exception as e:
+        raise e
+
 # @router.put("/add_application_credit_simulation", tags=["Applications"])
 # async def add_application_credit_simulation(application: ApplicationBase):
 #     try:

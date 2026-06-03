@@ -65,7 +65,6 @@ class UserBase(BaseModel):
 
 class CustomerBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
-    USER_ID: Optional[int] = None # Foreign Key to USER_ID
     FIRST_NAME: Optional[str] = None
     LAST_NAME: Optional[str] = None
     PHONE_NUMBER: Optional[str] = None

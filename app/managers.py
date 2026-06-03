@@ -459,6 +459,40 @@ class ApplicationManager:
 
         return cumulative_rate
     
+    async def test_application_credit_simulation(
+        self,
+        OTR: int,
+        DP: int,
+        TENOR_YEAR: int,
+        TENOR_MONTH: int,
+        TYPE: str,
+        PROVINCE_ID: int,
+        PROVISION: int = 0
+    ):
+        interest_rate_object = await get_interest_rate_by_conditions_db({"TYPE": TYPE, "TENOR_YEAR": TENOR_YEAR})
+        interest_rate_object = interest_rate_object[0]
+        INTEREST_RATE = interest_rate_object["RATE"]
+        TJH = interest_rate_object["TJH"]
+        ADMIN = interest_rate_object["ADMIN_FEE"] + interest_rate_object["FIDUCIAL_FEE"] + interest_rate_object["INSURANCE_POLICY_FEE"]
+        INSURANCE_RATE = await self.calculate_insurance_rate(OTR, PROVINCE_ID, TENOR_YEAR, TYPE)
+        INSURANCE = OTR * INSURANCE_RATE + TJH
+        PRINCIPAL = OTR - DP + INSURANCE + PROVISION
+        INTEREST = math.ceil((PRINCIPAL * INTEREST_RATE * TENOR_YEAR) / 1000) * 1000
+        MONTHLY_PAYMENT = math.ceil((PRINCIPAL + INTEREST) / TENOR_MONTH / 500.0) * 500
+        ret = {
+            "OTR": OTR,
+            "DP": DP,
+            "INSURANCE": INSURANCE,
+            "PROVISION": PROVISION,
+            "PRINCIPAL": PRINCIPAL,
+            "MONTHLY_PAYMENT": MONTHLY_PAYMENT,
+            "TENOR": TENOR_MONTH - 1,
+            "FLAT_RATE": INTEREST_RATE,
+            "ADMIN_FEE": ADMIN,
+            "FIRST_PAYMENT": DP + MONTHLY_PAYMENT + ADMIN
+        }
+        return ret
+
     async def application_credit_simulation(
         self,
         PROVISION: int = 0
