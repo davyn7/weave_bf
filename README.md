@@ -38,9 +38,26 @@ Frontend: Retool
 
 * 
 
-## To-do List
+## BUANA TO-DO LIST
 
-*
+* **CREATE** *[PUT]* `approve_user(user_id: int)`
+    * Once a `USER` registers, it will be added to the `USERS` table.
+    * Call `generate_unique_code` for the new `USER`.
+    * Update the following columns in `USER`: `IS_ACTIVE = True` & `UNIQUE_CODE` to the generated code.
+
+* **CREATE** *[GET]* `get_new_users`
+    * Retrieve all `USER` in `USERS` where `IS_ACTIVE = False`.
+
+## USER TO-DO LIST
+
+* **EDIT** *[POST]* `add_user(user: UserBase)`
+    * Add `dealer_code` as parameter. 
+    * Search for `DEALER` based on `dealer_code`. 
+    * Add the `DEALER_ID` to `UserBase`.
+
+## DEALER TO-DO LIST
+
+* **CREATE** *[PUT]* `assign_dealer_pic(user_id: int)`
 
 ## Questions to Ask
 

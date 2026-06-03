@@ -60,18 +60,22 @@ from app.db import (
     update_dealer_db,
     delete_dealer_db,
     delete_dealers_db,
+    get_dealer_by_code_db,
     get_users_db,
     get_user_db,
     add_user_db,
     update_user_db,
     delete_user_db,
     delete_users_db,
+    get_new_users_db,
+    approve_user_db,
     get_customers_db,
     get_customer_db,
     add_customer_db,
     update_customer_db,
     delete_customer_db,
     delete_customers_db,
+    get_customers_by_user_id_db,
     get_spouses_db,
     get_spouse_db,
     add_spouse_db,
@@ -97,12 +101,14 @@ from app.db import (
     delete_asset_db,
     delete_assets_db
 )
-from app.helpers import (
-    generate_unique_code
-)
 from uuid import UUID
 from typing import Optional
 import math
+import random
+import string
+
+def generate_unique_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
 
 class TestManager:
 
@@ -258,6 +264,7 @@ class DealerManager:
         return await get_dealer_db(dealer_id)
 
     async def add_dealer(self):
+        self.dealer.UNIQUE_CODE = generate_unique_code()
         return await add_dealer_db(self.dealer)
     
     async def update_dealer(self, dealer_id: int):
@@ -280,7 +287,9 @@ class UserManager:
     async def get_user(self, user_id: int):
         return await get_user_db(user_id)
 
-    async def add_user(self):
+    async def add_user(self, dealer_code: str):
+        dealer = await get_dealer_by_code_db(dealer_code)
+        self.user.DEALER_ID = dealer["id"]
         return await add_user_db(self.user)
     
     async def update_user(self, user_id: int):
@@ -291,6 +300,13 @@ class UserManager:
 
     async def delete_users(self):
         return await delete_users_db()
+
+    async def get_new_users(self):
+        return await get_new_users_db()
+
+    async def approve_user(self, user_id: int):
+        unique_code = generate_unique_code()
+        return await approve_user_db(user_id, unique_code)
 
 class CustomerManager:
 
@@ -314,6 +330,9 @@ class CustomerManager:
 
     async def delete_customers(self):
         return await delete_customers_db()
+
+    async def get_customers_by_user_id(self, user_id: int):
+        return await get_customers_by_user_id_db(user_id)
 
 class SpouseManager:
 

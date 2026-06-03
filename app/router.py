@@ -393,10 +393,10 @@ async def get_user(user_id: int):
         raise e
 
 @router.post("/add_user", tags=["User"])
-async def add_user(user: UserBase):
+async def add_user(user: UserBase, dealer_code: str):
     try:
         manager = UserManager(user)
-        return await manager.add_user()
+        return await manager.add_user(dealer_code)
     except Exception as e:
         raise e
 
@@ -421,6 +421,22 @@ async def delete_users():
     try:
         manager = UserManager(None)
         return await manager.delete_users()
+    except Exception as e:
+        raise e
+
+@router.get("/new_users", tags=["User"])
+async def get_new_users():
+    try:
+        manager = UserManager(None)
+        return await manager.get_new_users()
+    except Exception as e:
+        raise e
+
+@router.put("/approve_user/{user_id}", tags=["User"])
+async def approve_user(user_id: int):
+    try:
+        manager = UserManager(None)
+        return await manager.approve_user(user_id)
     except Exception as e:
         raise e
 
@@ -471,6 +487,14 @@ async def delete_customers():
     try:
         manager = CustomerManager(None)
         return await manager.delete_customers()
+    except Exception as e:
+        raise e
+
+@router.get("/customers_by_user_id/{user_id}", tags=["Customers"])
+async def get_customers_by_user_id(user_id: int):
+    try:
+        manager = CustomerManager(None)
+        return await manager.get_customers_by_user_id(user_id)
     except Exception as e:
         raise e
 
