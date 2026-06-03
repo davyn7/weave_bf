@@ -34,6 +34,7 @@ from app.schemas import (
     ApplicationBase,
     AssetBase
 )
+from pydantic import BaseModel
 from uuid import UUID
 
 router = APIRouter()
@@ -678,11 +679,19 @@ async def application_credit_simulation(application_id: int, PROVISION: int = 0)
     except Exception as e:
         raise e
 
+class CreditSimulationRequest(BaseModel):
+    OTR: int
+    DP: int
+    TENOR_YEAR: int
+    TENOR_MONTH: int
+    TYPE: str
+    PROVINCE_ID: int
+
 @router.post("/test_application_credit_simulation", tags=["Applications"])
-async def test_application_credit_simulation(OTR: int, DP: int, TENOR_YEAR: int, TENOR_MONTH: int, TYPE: str, PROVINCE_ID: int):
+async def test_application_credit_simulation(payload: CreditSimulationRequest):
     try:
         manager = ApplicationManager(None)
-        return await manager.test_application_credit_simulation(OTR=OTR, DP=DP, TENOR_YEAR=TENOR_YEAR, TENOR_MONTH=TENOR_MONTH, TYPE=TYPE, PROVINCE_ID=PROVINCE_ID)
+        return await manager.test_application_credit_simulation(OTR=payload.OTR, DP=payload.DP, TENOR_YEAR=payload.TENOR_YEAR, TENOR_MONTH=payload.TENOR_MONTH, TYPE=payload.TYPE, PROVINCE_ID=payload.PROVINCE_ID)
     except Exception as e:
         raise e
 
