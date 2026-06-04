@@ -5,23 +5,6 @@ from datetime import date
 from typing import Optional, List
 from uuid import UUID
 
-class ProvinceBase(BaseModel):
-    NAME: Optional[str] = None
-
-class CityBase(BaseModel):
-    PROVINCE_ID: Optional[int] = None # Foreign Key to PROVINCE_ID
-    NAME: Optional[str] = None
-    TYPE: Optional[str] = None # Kota or Kabupaten
-
-class KecamatanBase(BaseModel):
-    CITY_ID: Optional[int] = None # Foreign Key to CITY_ID
-    NAME: Optional[str] = None
-
-class KelurahanBase(BaseModel):
-    KECAMATAN_ID: Optional[int] = None # Foreign Key to KECAMATAN_ID
-    NAME: Optional[str] = None
-    POSTAL_CODE: Optional[str] = None
-
 class DealerBase(BaseModel):
     BRANCH_ID: Optional[int] = None # Foreign Key to BRANCH_ID
     NAME: Optional[str] = None
@@ -158,3 +141,14 @@ class CMOBase(BaseModel):
 class SurveyBase(BaseModel):
     APPLICATION_ID: Optional[int] = None # Foreign Key to APPLICATION_ID
     pass
+
+# Testing
+
+class InsuranceSpec(BaseModel):
+    UPPER_LIMIT: int
+    LOWER_LIMIT: int
+    RATE: float
+
+class BatchAddInsurancesRequest(BaseModel):
+    provinces: list[int]
+    specs: list[InsuranceSpec]

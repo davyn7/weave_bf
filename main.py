@@ -3,12 +3,14 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from app.router import router
+from app.locations.router import router as locations_router
 
 load_dotenv()
 
 app = FastAPI()
 
 app.include_router(router)
+app.include_router(locations_router)
 
 @app.get("/")
 def read_root():
