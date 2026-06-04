@@ -7,6 +7,7 @@ from app.locations.router import router as locations_router
 from app.rates.router import router as rates_router
 from app.customers.router import router as customers_router
 from app.dealers.router import router as dealers_router
+from app.applications.router import router as applications_router
 
 load_dotenv()
 
@@ -17,6 +18,7 @@ app.include_router(locations_router)
 app.include_router(rates_router)
 app.include_router(customers_router)
 app.include_router(dealers_router)
+app.include_router(applications_router)
 
 @app.get("/")
 def read_root():
