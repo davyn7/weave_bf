@@ -7,9 +7,6 @@ from app.managers import (
     CMOManager,
     DealerManager,
     UserManager,
-    CustomerManager,
-    SpouseManager,
-    GuarantorManager,
     ApplicationManager,
     AssetManager
 )
@@ -18,9 +15,6 @@ from app.schemas import (
     CMOBase,
     DealerBase,
     UserBase,
-    CustomerBase,
-    SpouseBase,
-    GuarantorBase,
     ApplicationBase,
     AssetBase,
 )
@@ -253,164 +247,6 @@ async def approve_user(user_id: int):
     try:
         manager = UserManager(None)
         return await manager.approve_user(user_id)
-    except Exception as e:
-        raise e
-
-# Customer Routers
-
-@router.get("/customers", tags=["Customers"])
-async def get_customers():
-    try:
-        manager = CustomerManager(None)
-        return await manager.get_customers()
-    except Exception as e:
-        raise e
-
-@router.get("/customers/{customer_id}", tags=["Customers"])
-async def get_customer(customer_id: int):
-    try:
-        manager = CustomerManager(None)
-        return await manager.get_customer(customer_id)
-    except Exception as e:
-        raise e
-
-@router.post("/add_customer", tags=["Customers"])
-async def add_customer(customer: CustomerBase):
-    try:
-        manager = CustomerManager(customer)
-        return await manager.add_customer()
-    except Exception as e:
-        raise e
-
-@router.put("/update_customer/{customer_id}", tags=["Customers"])
-async def update_customer(customer_id: int, customer: CustomerBase):
-    try:
-        manager = CustomerManager(customer)
-        return await manager.update_customer(customer_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_customer/{customer_id}", tags=["Customers"])
-async def delete_customer(customer_id: int):
-    try:
-        manager = CustomerManager(None)
-        return await manager.delete_customer(customer_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_customers", tags=["Customers"])
-async def delete_customers():
-    try:
-        manager = CustomerManager(None)
-        return await manager.delete_customers()
-    except Exception as e:
-        raise e
-
-@router.get("/customers_by_user_id/{user_id}", tags=["Customers"])
-async def get_customers_by_user_id(user_id: int):
-    try:
-        manager = CustomerManager(None)
-        return await manager.get_customers_by_user_id(user_id)
-    except Exception as e:
-        raise e
-
-# Spouse Routers
-
-@router.get("/spouses", tags=["Spouses"])
-async def get_spouses():
-    try:
-        manager = SpouseManager(None)
-        return await manager.get_spouses()
-    except Exception as e:
-        raise e
-
-@router.get("/spouses/{spouse_id}", tags=["Spouses"])
-async def get_spouse(spouse_id: int):
-    try:
-        manager = SpouseManager(None)
-        return await manager.get_spouse(spouse_id)
-    except Exception as e:
-        raise e
-
-@router.post("/add_spouse", tags=["Spouses"])
-async def add_spouse(spouse: SpouseBase):
-    try:
-        manager = SpouseManager(spouse)
-        return await manager.add_spouse()
-    except Exception as e:
-        raise e
-
-@router.put("/update_spouse/{spouse_id}", tags=["Spouses"])
-async def update_spouse(spouse_id: int, spouse: SpouseBase):
-    try:
-        manager = SpouseManager(spouse)
-        return await manager.update_spouse(spouse_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_spouse/{spouse_id}", tags=["Spouses"])
-async def delete_spouse(spouse_id: int):
-    try:
-        manager = SpouseManager(None)
-        return await manager.delete_spouse(spouse_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_spouses", tags=["Spouses"])
-async def delete_spouses():
-    try:
-        manager = SpouseManager(None)
-        return await manager.delete_spouses()
-    except Exception as e:
-        raise e
-
-# Guarantor Routers
-
-@router.get("/guarantors", tags=["Guarantors"])
-async def get_guarantors():
-    try:
-        manager = GuarantorManager(None)
-        return await manager.get_guarantors()
-    except Exception as e:
-        raise e
-
-@router.get("/guarantors/{guarantor_id}", tags=["Guarantors"])
-async def get_guarantor(guarantor_id: int):
-    try:
-        manager = GuarantorManager(None)
-        return await manager.get_guarantor(guarantor_id)
-    except Exception as e:
-        raise e
-
-@router.post("/add_guarantor", tags=["Guarantors"])
-async def add_guarantor(guarantor: GuarantorBase): 
-    try:
-        manager = GuarantorManager(guarantor)
-        return await manager.add_guarantor()
-    except Exception as e:
-        raise e
-
-@router.put("/update_guarantor/{guarantor_id}", tags=["Guarantors"])
-async def update_guarantor(guarantor_id: int, guarantor: GuarantorBase):
-    try:
-        manager = GuarantorManager(guarantor)
-        return await manager.update_guarantor(guarantor_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_guarantor/{guarantor_id}", tags=["Guarantors"])
-async def delete_guarantor(guarantor_id: int):
-    try:
-        manager = GuarantorManager(None)
-        return await manager.delete_guarantor(guarantor_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_guarantors", tags=["Guarantors"])
-async def delete_guarantors():
-    try:
-        manager = GuarantorManager(None)
-        return await manager.delete_guarantors()
     except Exception as e:
         raise e
 

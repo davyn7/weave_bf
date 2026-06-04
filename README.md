@@ -40,6 +40,12 @@ Frontend: Retool
 
 ## BUANA TO-DO LIST
 
+* Refactor Routers
+
+* **CREATE** *[PUT]* `update_spouse(customer_id: int, spouse: SpouseBase)`
+
+* **CREATE** *[PUT]* `update_guarantor(customer_id: int, guarantor: GuarantorBase)`
+
 * **CREATE** *[PUT]* `approve_user(user_id: int)`
     * Once a `USER` registers, it will be added to the `USERS` table.
     * Call `generate_unique_code` for the new `USER`.

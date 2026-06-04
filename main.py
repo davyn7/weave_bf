@@ -5,6 +5,7 @@ from supabase import create_client, Client
 from app.router import router
 from app.locations.router import router as locations_router
 from app.rates.router import router as rates_router
+from app.customers.router import router as customers_router
 
 load_dotenv()
 
@@ -13,6 +14,7 @@ app = FastAPI()
 app.include_router(router)
 app.include_router(locations_router)
 app.include_router(rates_router)
+app.include_router(customers_router)
 
 @app.get("/")
 def read_root():
