@@ -18,16 +18,6 @@ from uuid import UUID
 
 router = APIRouter(prefix="/buana", tags=["Buana"])
 
-# Initialize DB Testing
-
-@router.post("/populate", tags=["Testing"])
-async def populate():
-    pass
-
-@router.delete("/clear", tags=["Testing"])
-async def clear():
-    pass
-
 # Branch Routers
 
 @router.get("/branches")
