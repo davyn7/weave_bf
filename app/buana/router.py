@@ -2,7 +2,6 @@
 
 from fastapi import APIRouter
 from app.buana.managers import (
-    TestManager,
     BranchManager,
     CMOManager,
     AssetManager

@@ -9,6 +9,7 @@ from app.dealers.router import router as dealers_router
 from app.applications.router import router as applications_router
 from app.buana.router import router as buana_router
 from app.tests.router import router as tests_router
+from app.users.router import router as users_router
 
 load_dotenv()
 
@@ -21,6 +22,7 @@ app.include_router(dealers_router)
 app.include_router(applications_router)
 app.include_router(buana_router)
 app.include_router(tests_router)
+app.include_router(users_router)
 
 @app.get("/")
 def read_root():
