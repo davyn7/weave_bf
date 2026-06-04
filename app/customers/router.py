@@ -66,11 +66,11 @@ async def delete_customers():
     except Exception as e:
         raise e
 
-@router.get("/customers_by_user_id/{user_id}")
-async def get_customers_by_user_id(user_id: int):
+@router.get("/customers_by_salesperson_id/{salesperson_id}")
+async def get_customers_by_salesperson_id(salesperson_id: int):
     try:
         manager = CustomerManager(None)
-        return await manager.get_customers_by_user_id(user_id)
+        return await manager.get_customers_by_salesperson_id(salesperson_id)
     except Exception as e:
         raise e
 

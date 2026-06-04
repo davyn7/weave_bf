@@ -12,7 +12,7 @@ from app.customers.db import (
     update_customer_db,
     delete_customer_db,
     delete_customers_db,
-    get_customers_by_user_id_db,
+    get_customers_by_salesperson_id_db,
     get_spouses_db,
     get_spouse_db,
     add_spouse_db,
@@ -55,8 +55,8 @@ class CustomerManager:
     async def delete_customers(self):
         return await delete_customers_db()
 
-    async def get_customers_by_user_id(self, user_id: int):
-        return await get_customers_by_user_id_db(user_id)
+    async def get_customers_by_salesperson_id(self, salesperson_id: int):
+        return await get_customers_by_salesperson_id_db(salesperson_id)
 
 class SpouseManager:
 

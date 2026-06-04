@@ -3,7 +3,7 @@
 from app.connection import supabase
 from app.dealers.schemas import (
     DealerBase,
-    UserBase
+    SalespersonBase
 )
 from uuid import UUID
 
@@ -39,38 +39,38 @@ async def get_dealer_by_code_db(dealer_code: str):
     response = supabase.table("DEALERS").select("*").eq("UNIQUE_CODE", dealer_code).execute()
     return response.data[0]
 
-# User DB Operations
+# Salesperson DB Operations
 
-async def get_users_db():
-    response = supabase.table("USERS").select("*").execute()
+async def get_salespersons_db():
+    response = supabase.table("SALESPERSONS").select("*").execute()
     return response.data
 
-async def get_user_db(user_id: int):
-    response = supabase.table("USERS").select("*").eq("id", user_id).execute()
+async def get_salesperson_db(salesperson_id: int):
+    response = supabase.table("SALESPERSONS").select("*").eq("id", salesperson_id).execute()
     return response.data
 
-async def add_user_db(user: UserBase):
-    user_data = user.model_dump(mode="json")
-    response = supabase.table("USERS").insert(user_data).execute()
+async def add_salesperson_db(salesperson: SalespersonBase):
+    salesperson_data = salesperson.model_dump(mode="json")
+    response = supabase.table("SALESPERSONS").insert(salesperson_data).execute()
     return response.data
 
-async def update_user_db(user: UserBase, user_id: int):
-    user_data = user.model_dump(exclude_unset=True, mode="json")
-    response = supabase.table("USERS").update(user_data).eq("id", user_id).execute()
+async def update_salesperson_db(salesperson: SalespersonBase, salesperson_id: int):
+    salesperson_data = salesperson.model_dump(exclude_unset=True, mode="json")
+    response = supabase.table("SALESPERSONS").update(salesperson_data).eq("id", salesperson_id).execute()
     return response.data
 
-async def delete_user_db(user_id: int):
-    response = supabase.table("USERS").delete().eq("id", user_id).execute()
+async def delete_salesperson_db(salesperson_id: int):
+    response = supabase.table("SALESPERSONS").delete().eq("id", salesperson_id).execute()
     return response.data
 
-async def delete_users_db():
-    response = supabase.table("USERS").delete().neq("id", 0).execute()
+async def delete_salespersons_db():
+    response = supabase.table("SALESPERSONS").delete().neq("id", 0).execute()
     return response.data
 
-async def get_new_users_db():
-    response = supabase.table("USERS").select("*").eq("IS_ACTIVE", False).execute()
+async def get_new_salespersons_db():
+    response = supabase.table("SALESPERSONS").select("*").eq("IS_ACTIVE", False).execute()
     return response.data
 
-async def approve_user_db(user_id: int, unique_code: str):
-    response = supabase.table("USERS").update({"IS_ACTIVE": True, "UNIQUE_CODE": unique_code}).eq("id", user_id).execute()
+async def approve_salesperson_db(salesperson_id: int, unique_code: str):
+    response = supabase.table("SALESPERSONS").update({"IS_ACTIVE": True, "UNIQUE_CODE": unique_code}).eq("id", salesperson_id).execute()
     return response.data

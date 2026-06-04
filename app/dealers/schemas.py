@@ -19,7 +19,7 @@ class DealerBase(BaseModel):
     DESCRIPTION: Optional[str] = None
     UNIQUE_CODE: Optional[str] = None
 
-class UserBase(BaseModel):
+class SalespersonBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
     FIRST_NAME: Optional[str] = None
     LAST_NAME: Optional[str] = None

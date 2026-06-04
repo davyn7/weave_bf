@@ -4,15 +4,15 @@ from fastapi import APIRouter
 
 from app.dealers.schemas import (
     DealerBase,
-    UserBase
+    SalespersonBase
 )
 
 from app.dealers.managers import (
     DealerManager,
-    UserManager
+    SalespersonManager
 )
 
-router = APIRouter(prefix="/dealers", tags=["Dealers & Users"])
+router = APIRouter(prefix="/dealers", tags=["Dealers & Salespersons"])
 
 # Dealer Routers
 
@@ -64,68 +64,68 @@ async def delete_dealers():
     except Exception as e:
         raise e
 
-# User Routers
+# Salesperson Routers
 
-@router.get("/users", tags=["User"])
-async def get_users():
+@router.get("/salespersons", tags=["Salesperson"])
+async def get_salespersons():
     try:
-        manager = UserManager(None)
-        return await manager.get_users()
+        manager = SalespersonManager(None)
+        return await manager.get_salespersons()
     except Exception as e:
         raise e
 
-@router.get("/users/{user_id}", tags=["User"])
-async def get_user(user_id: int):
+@router.get("/salespersons/{salesperson_id}", tags=["Salesperson"])
+async def get_salesperson(salesperson_id: int):
     try:
-        manager = UserManager(None)
-        return await manager.get_user(user_id)
+        manager = SalespersonManager(None)
+        return await manager.get_salesperson(salesperson_id)
     except Exception as e:
         raise e
 
-@router.post("/add_user", tags=["User"])
-async def add_user(user: UserBase, dealer_code: str):
+@router.post("/add_salesperson", tags=["Salesperson"])
+async def add_salesperson(salesperson: SalespersonBase, dealer_code: str):
     try:
-        manager = UserManager(user)
-        return await manager.add_user(dealer_code)
+        manager = SalespersonManager(salesperson)
+        return await manager.add_salesperson(dealer_code)
     except Exception as e:
         raise e
 
-@router.put("/update_user/{user_id}", tags=["User"])
-async def update_user(user_id: int, user: UserBase):
+@router.put("/update_salesperson/{salesperson_id}", tags=["Salesperson"])
+async def update_salesperson(salesperson_id: int, salesperson: SalespersonBase):
     try:
-        manager = UserManager(user)
-        return await manager.update_user(user_id)
+        manager = SalespersonManager(salesperson)
+        return await manager.update_salesperson(salesperson_id)
     except Exception as e:
         raise e
 
-@router.delete("/delete_user/{user_id}", tags=["User"])
-async def delete_user(user_id: int):
+@router.delete("/delete_salesperson/{salesperson_id}", tags=["Salesperson"])
+async def delete_salesperson(salesperson_id: int):
     try:
-        manager = UserManager(None)
-        return await manager.delete_user(user_id)
+        manager = SalespersonManager(None)
+        return await manager.delete_salesperson(salesperson_id)
     except Exception as e:
         raise e
 
-@router.delete("/delete_users", tags=["User"])
-async def delete_users():
+@router.delete("/delete_salespersons", tags=["Salesperson"])
+async def delete_salespersons():
     try:
-        manager = UserManager(None)
-        return await manager.delete_users()
+        manager = SalespersonManager(None)
+        return await manager.delete_salespersons()
     except Exception as e:
         raise e
 
-@router.get("/new_users", tags=["User"])
-async def get_new_users():
+@router.get("/new_salespersons", tags=["Salesperson"])
+async def get_new_salespersons():
     try:
-        manager = UserManager(None)
-        return await manager.get_new_users()
+        manager = SalespersonManager(None)
+        return await manager.get_new_salespersons()
     except Exception as e:
         raise e
 
-@router.put("/approve_user/{user_id}", tags=["User"])
-async def approve_user(user_id: int):
+@router.put("/approve_salesperson/{salesperson_id}", tags=["Salesperson"])
+async def approve_salesperson(salesperson_id: int):
     try:
-        manager = UserManager(None)
-        return await manager.approve_user(user_id)
+        manager = SalespersonManager(None)
+        return await manager.approve_salesperson(salesperson_id)
     except Exception as e:
         raise e

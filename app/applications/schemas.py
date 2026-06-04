@@ -9,7 +9,7 @@ class ApplicationBase(BaseModel):
     DEALER_ID: Optional[int] = None # Foreign Key to DEALER_ID
     CUSTOMER_ID: Optional[int] = None # Foreign Key to CUSTOMER_ID
     CMO_ID: Optional[int] = None # Foreign Key to CMO_ID
-    USER_ID: Optional[int] = None # Foreign Key to USER_ID
+    SALESPERSON_ID: Optional[int] = None # Foreign Key to SALESPERSON_ID
     ASSET_ID: Optional[int] = None # Foreign Key to ASSET_ID
     TENOR_YEAR: Optional[int] = None
     TENOR_MONTH: Optional[int] = None

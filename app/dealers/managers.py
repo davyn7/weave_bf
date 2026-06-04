@@ -2,7 +2,7 @@
 
 from app.dealers.schemas import (
     DealerBase,
-    UserBase
+    SalespersonBase
 )
 from app.dealers.db import (
     get_dealers_db,
@@ -12,14 +12,14 @@ from app.dealers.db import (
     delete_dealer_db,
     delete_dealers_db,
     get_dealer_by_code_db,
-    get_users_db,
-    get_user_db,
-    add_user_db,
-    update_user_db,
-    delete_user_db,
-    delete_users_db,
-    get_new_users_db,
-    approve_user_db
+    get_salespersons_db,
+    get_salesperson_db,
+    add_salesperson_db,
+    update_salesperson_db,
+    delete_salesperson_db,
+    delete_salespersons_db,
+    get_new_salespersons_db,
+    approve_salesperson_db
 )
 from uuid import UUID
 from typing import Optional
@@ -54,34 +54,34 @@ class DealerManager:
     async def delete_dealers(self):
         return await delete_dealers_db()
 
-class UserManager:
+class SalespersonManager:
 
-    def __init__(self, user: UserBase):
-        self.user = user
+    def __init__(self, salesperson: SalespersonBase):
+        self.salesperson = salesperson
 
-    async def get_users(self):
-        return await get_users_db()
+    async def get_salespersons(self):
+        return await get_salespersons_db()
     
-    async def get_user(self, user_id: int):
-        return await get_user_db(user_id)
+    async def get_salesperson(self, salesperson_id: int):
+        return await get_salesperson_db(salesperson_id)
 
-    async def add_user(self, dealer_code: str):
+    async def add_salesperson(self, dealer_code: str):
         dealer = await get_dealer_by_code_db(dealer_code)
-        self.user.DEALER_ID = dealer["id"]
-        return await add_user_db(self.user)
+        self.salesperson.DEALER_ID = dealer["id"]
+        return await add_salesperson_db(self.salesperson)
     
-    async def update_user(self, user_id: int):
-        return await update_user_db(self.user, user_id)
+    async def update_salesperson(self, salesperson_id: int):
+        return await update_salesperson_db(self.salesperson, salesperson_id)
     
-    async def delete_user(self, user_id: int):
-        return await delete_user_db(user_id)
+    async def delete_salesperson(self, salesperson_id: int):
+        return await delete_salesperson_db(salesperson_id)
 
-    async def delete_users(self):
-        return await delete_users_db()
+    async def delete_salespersons(self):
+        return await delete_salespersons_db()
 
-    async def get_new_users(self):
-        return await get_new_users_db()
+    async def get_new_salespersons(self):
+        return await get_new_salespersons_db()
 
-    async def approve_user(self, user_id: int):
+    async def approve_salesperson(self, salesperson_id: int):
         unique_code = generate_unique_code()
-        return await approve_user_db(user_id, unique_code)
+        return await approve_salesperson_db(salesperson_id, unique_code)

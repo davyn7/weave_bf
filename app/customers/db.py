@@ -36,8 +36,8 @@ async def delete_customers_db():
     response = supabase.table("CUSTOMERS").delete().neq("id", 0).execute()
     return response.data
 
-async def get_customers_by_user_id_db(user_id: int):
-    response = supabase.table("CUSTOMERS").select("*").eq("USER_ID", user_id).execute()
+async def get_customers_by_salesperson_id_db(salesperson_id: int):
+    response = supabase.table("CUSTOMERS").select("*").eq("SALESPERSON_ID", salesperson_id).execute()
     return response.data
 
 # Spouse DB Operations
