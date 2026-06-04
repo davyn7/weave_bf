@@ -1,5 +1,7 @@
+# app/buana/db.py
+
 from app.connection import supabase
-from app.schemas import (
+from app.buana.schemas import (
     BranchBase,
     CMOBase,
     AssetBase

@@ -1,13 +1,13 @@
-# app/router.py
+# app/buana/router.py
 
 from fastapi import APIRouter
-from app.managers import (
+from app.buana.managers import (
     TestManager,
     BranchManager,
     CMOManager,
     AssetManager
 )
-from app.schemas import (
+from app.buana.schemas import (
     BranchBase,
     CMOBase,
     AssetBase
@@ -16,7 +16,7 @@ from pydantic import BaseModel
 from typing import List
 from uuid import UUID
 
-router = APIRouter()
+router = APIRouter(prefix="/buana", tags=["Buana"])
 
 # Initialize DB Testing
 
@@ -30,7 +30,7 @@ async def clear():
 
 # Branch Routers
 
-@router.get("/branches", tags=["Branch"])
+@router.get("/branches")
 async def get_branches():
     try:
         manager = BranchManager(None)
@@ -38,7 +38,7 @@ async def get_branches():
     except Exception as e:
         raise e
 
-@router.get("/branches/{branch_id}", tags=["Branch"])
+@router.get("/branches/{branch_id}")
 async def get_branch(branch_id: int):
     try:
         manager = BranchManager(None)
@@ -46,7 +46,7 @@ async def get_branch(branch_id: int):
     except Exception as e:
         raise e
 
-@router.post("/add_branch", tags=["Branch"])
+@router.post("/add_branch")
 async def add_branch(branch: BranchBase):
     try:
         manager = BranchManager(branch)
@@ -54,7 +54,7 @@ async def add_branch(branch: BranchBase):
     except Exception as e:
         raise e
 
-@router.put("/update_branch/{branch_id}", tags=["Branch"])
+@router.put("/update_branch/{branch_id}")
 async def update_branch(branch_id: int, branch: BranchBase):
     try:
         manager = BranchManager(branch)
@@ -62,7 +62,7 @@ async def update_branch(branch_id: int, branch: BranchBase):
     except Exception as e:
         raise e
 
-@router.delete("/delete_branch/{branch_id}", tags=["Branch"])
+@router.delete("/delete_branch/{branch_id}")
 async def delete_branch(branch_id: int):
     try:
         manager = BranchManager(None)
@@ -70,7 +70,7 @@ async def delete_branch(branch_id: int):
     except Exception as e:
         raise e
 
-@router.delete("/delete_branches", tags=["Branch"])
+@router.delete("/delete_branches")
 async def delete_branches():
     try:
         manager = BranchManager(None)
@@ -80,7 +80,7 @@ async def delete_branches():
 
 # CMO Routers
 
-@router.get("/cmos", tags=["CMO"])
+@router.get("/cmos")
 async def get_cmos():
     try:
         manager = CMOManager(None)
@@ -88,7 +88,7 @@ async def get_cmos():
     except Exception as e:
         raise e
 
-@router.get("/cmos/{cmo_id}", tags=["CMO"])
+@router.get("/cmos/{cmo_id}")
 async def get_cmo(cmo_id: int):
     try:
         manager = CMOManager(None)
@@ -96,7 +96,7 @@ async def get_cmo(cmo_id: int):
     except Exception as e:
         raise e
 
-@router.post("/add_cmo", tags=["CMO"])
+@router.post("/add_cmo")
 async def add_cmo(cmo: CMOBase):
     try:
         manager = CMOManager(cmo)
@@ -104,7 +104,7 @@ async def add_cmo(cmo: CMOBase):
     except Exception as e:
         raise e
 
-@router.put("/update_cmo/{cmo_id}", tags=["CMO"])
+@router.put("/update_cmo/{cmo_id}")
 async def update_cmo(cmo_id: int, cmo: CMOBase):
     try:
         manager = CMOManager(cmo)
@@ -112,7 +112,7 @@ async def update_cmo(cmo_id: int, cmo: CMOBase):
     except Exception as e:
         raise e
 
-@router.delete("/delete_cmo/{cmo_id}", tags=["CMO"])
+@router.delete("/delete_cmo/{cmo_id}")
 async def delete_cmo(cmo_id: int):
     try:
         manager = CMOManager(None)
@@ -120,7 +120,7 @@ async def delete_cmo(cmo_id: int):
     except Exception as e:
         raise e
 
-@router.delete("/delete_cmos", tags=["CMO"])
+@router.delete("/delete_cmos")
 async def delete_cmos():
     try:
         manager = CMOManager(None)
@@ -130,7 +130,7 @@ async def delete_cmos():
 
 # Asset Routers
 
-@router.get("/assets", tags=["Assets"])
+@router.get("/assets")
 async def get_assets():
     try:
         manager = AssetManager(None)
@@ -138,7 +138,7 @@ async def get_assets():
     except Exception as e:
         raise e
         
-@router.get("/assets/{asset_id}", tags=["Assets"])
+@router.get("/assets/{asset_id}")
 async def get_asset(asset_id: int):
     try:
         manager = AssetManager(None)
@@ -146,7 +146,7 @@ async def get_asset(asset_id: int):
     except Exception as e:
         raise e
         
-@router.post("/add_asset", tags=["Assets"])
+@router.post("/add_asset")
 async def add_asset(asset: AssetBase):
     try:
         manager = AssetManager(asset)
@@ -154,7 +154,7 @@ async def add_asset(asset: AssetBase):
     except Exception as e:
         raise e
 
-@router.put("/update_asset/{asset_id}", tags=["Assets"])
+@router.put("/update_asset/{asset_id}")
 async def update_asset(asset_id: int, asset: AssetBase):
     try:
         manager = AssetManager(asset)
@@ -162,7 +162,7 @@ async def update_asset(asset_id: int, asset: AssetBase):
     except Exception as e:
         raise e
         
-@router.delete("/delete_asset/{asset_id}", tags=["Assets"])
+@router.delete("/delete_asset/{asset_id}")
 async def delete_asset(asset_id: int):
     try:
         manager = AssetManager(None)
@@ -170,7 +170,7 @@ async def delete_asset(asset_id: int):
     except Exception as e:
         raise e
         
-@router.delete("/delete_assets", tags=["Assets"])
+@router.delete("/delete_assets")
 async def delete_assets():
     try:
         manager = AssetManager(None)

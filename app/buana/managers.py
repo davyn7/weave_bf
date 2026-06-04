@@ -1,11 +1,11 @@
-# app/managers.py
+# app/buana/managers.py
 
-from app.schemas import (
+from app.buana.schemas import (
     BranchBase,
     CMOBase,
     AssetBase
 )
-from app.db import (
+from app.buana.db import (
     get_branches_db,
     get_branch_db,
     add_branch_db,
@@ -21,7 +21,7 @@ from app.db import (
 )
 
 # For Assets
-from app.db import (
+from app.buana.db import (
     get_assets_db,
     get_asset_db,
     add_asset_db,
