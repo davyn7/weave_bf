@@ -3,8 +3,6 @@
 from fastapi import APIRouter
 from app.managers import (
     TestManager,
-    InterestRateManager,
-    InsuranceManager,
     BranchManager,
     CMOManager,
     DealerManager,
@@ -16,8 +14,6 @@ from app.managers import (
     AssetManager
 )
 from app.schemas import (
-    InterestRateBase,
-    InsuranceBase,
     BranchBase,
     CMOBase,
     DealerBase,
@@ -27,8 +23,6 @@ from app.schemas import (
     GuarantorBase,
     ApplicationBase,
     AssetBase,
-    InsuranceSpec,
-    BatchAddInsurancesRequest
 )
 from pydantic import BaseModel
 from typing import List
@@ -45,125 +39,6 @@ async def populate():
 @router.delete("/clear", tags=["Testing"])
 async def clear():
     pass
-
-# Interest Rate Routers
-
-@router.get("/interest_rates", tags=["Interest Rate"])
-async def get_interest_rates():
-    try:
-        manager = InterestRateManager(None)
-        return await manager.get_interest_rates()
-    except Exception as e:
-        raise e
-
-@router.get("/interest_rates/{interest_rate_id}", tags=["Interest Rate"])
-async def get_interest_rate(interest_rate_id: int):
-    try:
-        manager = InterestRateManager(None)
-        return await manager.get_interest_rate(interest_rate_id)
-    except Exception as e:
-        raise e
-
-@router.post("/add_interest_rate", tags=["Interest Rate"])
-async def add_interest_rate(interest_rate: InterestRateBase):
-    try:
-        manager = InterestRateManager(interest_rate)
-        return await manager.add_interest_rate()
-    except Exception as e:
-        raise e
-
-@router.put("/update_interest_rate/{interest_rate_id}", tags=["Interest Rate"])
-async def update_interest_rate(interest_rate_id: int, interest_rate: InterestRateBase):
-    try:
-        manager = InterestRateManager(interest_rate)
-        return await manager.update_interest_rate(interest_rate_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_interest_rate/{interest_rate_id}", tags=["Interest Rate"])
-async def delete_interest_rate(interest_rate_id: int):
-    try:
-        manager = InterestRateManager(None)
-        return await manager.delete_interest_rate(interest_rate_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_interest_rates", tags=["Interest Rate"])
-async def delete_interest_rates():
-    try:
-        manager = InterestRateManager(None)
-        return await manager.delete_interest_rates()
-    except Exception as e:
-        raise e
-
-@router.put("/update_interest_rate_field_by_conditions", tags=["Interest Rate"])
-async def update_interest_rate_field_by_conditions(update_data: dict, conditions: dict):
-    try:
-        manager = InterestRateManager(None)
-        return await manager.update_interest_rate_field_by_conditions(update_data, conditions)
-    except Exception as e:
-        raise e
-
-# Insurance Routers
-
-@router.get("/insurances", tags=["Insurance"])
-async def get_insurances():
-    try:
-        manager = InsuranceManager(None)
-        return await manager.get_insurances()
-    except Exception as e:
-        raise e
-
-@router.get("/insurances/{insurance_id}", tags=["Insurance"])
-async def get_insurance(insurance_id: int):
-    try:
-        manager = InsuranceManager(None)
-        return await manager.get_insurance(insurance_id)
-    except Exception as e:
-        raise e
-
-@router.post("/add_insurance", tags=["Insurance"])
-async def add_insurance(insurance: InsuranceBase):
-    try:
-        manager = InsuranceManager(insurance)
-        return await manager.add_insurance()
-    except Exception as e:
-        raise e
-
-@router.put("/update_insurance/{insurance_id}", tags=["Insurance"])
-async def update_insurance(insurance_id: int, insurance: InsuranceBase):
-    try:
-        manager = InsuranceManager(insurance)
-        return await manager.update_insurance(insurance_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_insurance/{insurance_id}", tags=["Insurance"])
-async def delete_insurance(insurance_id: int):
-    try:
-        manager = InsuranceManager(None)
-        return await manager.delete_insurance(insurance_id)
-    except Exception as e:
-        raise e
-
-@router.delete("/delete_insurances", tags=["Insurance"])
-async def delete_insurances():
-    try:
-        manager = InsuranceManager(None)
-        return await manager.delete_insurances()
-    except Exception as e:
-        raise e
-
-# class BatchAddInsurancesRequest(BaseModel):
-    
-
-@router.post("/batch_add_insurances", tags=["Insurance"])
-async def batch_add_insurances(payload: BatchAddInsurancesRequest):
-    try:
-        manager = InsuranceManager(None)
-        return await manager.batch_add_insurances(payload.provinces, payload.specs)
-    except Exception as e:
-        raise e
 
 # Branch Routers
 
